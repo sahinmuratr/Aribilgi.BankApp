@@ -1,0 +1,145 @@
+﻿@model ApplicationUser
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6">
+        <h3>Kullanıcı Bilgileri</h3>
+        <p>Kullanıcının Adı : @Model.Name</p>
+        <p>Kullanıcının Soyadı : @Model.Surname</p>
+        <p>Kullanıcının Hesap Sayısı :  <getAccountCount application-user-id="@Model.Id"> </getAccountCount> </p>
+
+    </div>
+
+    <div class="col-md-6">
+        <h3>Yeni Hesap Ekle</h3>
+        <form action="/Account/Create" method="post">
+
+            <div class="mb-3 form-group">
+                <label>Hesap Numarası</label>
+                <input type="number" class="form-control" name="AccountNumber" />
+            </div>
+
+            <div class="mb-3 form-group">
+                <label>Hesap Bakiyesi</label>
+                <input type="number" class="form-control" name="Balance" />
+            </div>
+
+            <input name="ApplicationUserId" value="@Model.Id" class="d-none" />
+
+            <div class="mb-3 form-group">
+                <button type="submit" class="btn btn-success">Hesap Oluştur</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-12">
+
+        <h3>Kullanıcının Hesapları</h3>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Hesap No
+                    </th>
+                    <th>
+                        Hesap Bakiyesi
+                    </th>
+                    <th>
+                        Transfer Et
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    foreach (Account item in Model.Accounts)
+                    {
+                        <tr>
+                            <td>@item.AccountNumber</td>
+                            <td>@item.Balance</td>
+                            <td> <a onclick="OpenModalPopup(@item.Id)" class="btn-sm btn-success">Transfer Et </a> </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12">
+
+        <h3>Kullanıcının Hesap Haraketleri</h3>
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Kime Transfer
+                    </th>
+                    <th>
+                        Transfer Edilen Miktar
+                    </th>
+                    <th>
+                        Tarih
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    foreach (Account item in Model.Accounts)
+                   {
+                    //    <tr>
+                   //         <td>@item.ToAccountId</td>
+                     //       <td>@item.Amount</td>
+                       //     <td>@item.TransactionTime</td>
+
+//                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="modal fade" id="mdlTransferPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Para Transfer Ekranı</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/Account/SendMoney" method="post">
+                <div class="form-group">
+                    <label for="exampleFormControlSelect1">Göndermek İstediğiniz Hesap</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>11</option>
+                    </select>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Aktarılacak Hesap No</label>
+                        <input class="form-control" name="toAccount" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Aktarılacak Tutar</label>
+                        <input class="form-control" name="amount" />
+                    </div>
+
+                    <input id="txtFromAccountId" name="fromAccount" class="d-none" />
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="submit" class="btn btn-primary">Transfer Et</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
