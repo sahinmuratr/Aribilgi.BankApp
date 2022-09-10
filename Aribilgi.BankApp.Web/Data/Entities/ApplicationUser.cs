@@ -9,7 +9,6 @@ namespace Aribilgi.BankApp.Web.Data.Entities
         public string Surname { get; set; }
 
         public List<Account> Accounts { get; set; }
-        public List<Transaction> Transactions { get; set; }
 
         
     }

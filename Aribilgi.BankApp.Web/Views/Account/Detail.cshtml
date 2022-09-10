@@ -1,0 +1,22 @@
+﻿@model AccountDetailDTO
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row mt-3 text-center">
+    <div class="col-3">
+        <h5>Güncel Bakiye</h5>
+        <p>@Model.Balance</p>
+    </div>
+    <div class="col-3 text-center">
+        <h5>Toplam İşlem Sayısı</h5>
+        <p>@Model.TransactionCount</p>
+    </div>
+    <div class="col-3 text-center">
+        <h5>Gelen İşlem Sayısı</h5>
+        <p>@Model.InTransactionCount</p>
+    </div>
+    <div class="col-3 text-center">
+        <h5>Giden İşlem Sayısı</h5>
+        <p>@Model.OutTransactionCount</p>
+    </div>
+</div>

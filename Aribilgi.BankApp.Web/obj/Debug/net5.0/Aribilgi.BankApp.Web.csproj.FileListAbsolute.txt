@@ -763,3 +763,5 @@ C:\Users\murat\Desktop\CORE\Aribilgi.BankApp\Aribilgi.BankApp.Web\obj\Debug\net5
 C:\Users\murat\Desktop\CORE\Aribilgi.BankApp\Aribilgi.BankApp.Web\obj\Debug\net5.0\Aribilgi.BankApp.Web.genruntimeconfig.cache
 C:\Users\murat\Desktop\CORE\Aribilgi.BankApp\Aribilgi.BankApp.Web\obj\Debug\net5.0\ref\Aribilgi.BankApp.Web.dll
 C:\Users\murat\Desktop\CORE\Aribilgi.BankApp\Aribilgi.BankApp.Web\obj\Debug\net5.0\Razor\Views\Account\Index.cshtml.g.cs
+C:\Users\murat\Desktop\CORE\Aribilgi.BankApp\Aribilgi.BankApp.Web\obj\Debug\net5.0\Razor\Views\Transaction\Index.cshtml.g.cs
+C:\Users\murat\Desktop\CORE\Aribilgi.BankApp\Aribilgi.BankApp.Web\obj\Debug\net5.0\Razor\Views\Account\Detail.cshtml.g.cs

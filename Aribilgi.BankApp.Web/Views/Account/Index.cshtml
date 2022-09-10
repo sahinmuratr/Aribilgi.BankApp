@@ -58,42 +58,10 @@
                         <tr>
                             <td>@item.AccountNumber</td>
                             <td>@item.Balance</td>
-                            <td> <a onclick="OpenModalPopup(@item.Id)" class="btn-sm btn-success">Transfer Et </a> </td>
+                            <td> <a onclick="OpenModalPopup(@item.Id)" class="btn-sm btn-success">Transfer Et </a>
+                            <a href="/Account/Detail?AccountId=@item.Id" class="btn btn-primary ml-1">Hesap Detayı</a>
+                            </td>                         
                         </tr>
-                    }
-                }
-
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-12">
-
-        <h3>Kullanıcının Hesap Haraketleri</h3>
-        <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th>
-                        Kime Transfer
-                    </th>
-                    <th>
-                        Transfer Edilen Miktar
-                    </th>
-                    <th>
-                        Tarih
-                    </th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @{
-                    foreach (Account item in Model.Accounts)
-                   {
-                    //    <tr>
-                   //         <td>@item.ToAccountId</td>
-                     //       <td>@item.Amount</td>
-                       //     <td>@item.TransactionTime</td>
-
-//                        </tr>
                     }
                 }
 
@@ -114,10 +82,6 @@
             </div>
             <form action="/Account/SendMoney" method="post">
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Göndermek İstediğiniz Hesap</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option>11</option>
-                    </select>
                 </div>
 
                 <div class="modal-body">

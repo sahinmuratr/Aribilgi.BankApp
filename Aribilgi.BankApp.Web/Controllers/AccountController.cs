@@ -2,8 +2,10 @@
 using Aribilgi.BankApp.Web.Data.Entities;
 using Aribilgi.BankApp.Web.Data.Enums;
 using Aribilgi.BankApp.Web.Data.Interfaces;
+using Aribilgi.BankApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Aribilgi.BankApp.Web.Controllers
@@ -31,6 +33,36 @@ namespace Aribilgi.BankApp.Web.Controllers
 
             return View(user);
         }
+        public IActionResult Detail(int AccountId)
+        {
+            AccountDetailDTO _account = new();
+            _account.Balance = _accountRepo.Get(x => x.Id == AccountId).Balance;
+            _account.TransactionCount = _transactionRepo.GetAll(x => x.FromAccountId == AccountId || x.ToAccountId == AccountId).Count;
+            _account.InTransactionCount = _transactionRepo.GetAll(x => x.FromAccountId == AccountId).Count;
+            _account.OutTransactionCount = _transactionRepo.GetAll(x => x.ToAccountId == AccountId).Count;
+
+
+            List<TransactionDTO> listDto = new();
+            List<Transaction> list = _transactionRepo.GetAll(x => x.FromAccountId == AccountId || x.ToAccountId == AccountId);
+
+            foreach (Transaction item in list)
+            {
+                listDto.Add(new TransactionDTO
+                {
+                    Id = item.Id,
+                    Amount = item.Amount,
+                    TransactionTime = item.TransactionTime,
+                    FromAccount = _accountRepo.Get(x => x.Id == item.FromAccountId),
+                    ToAccount = _accountRepo.Get(x => x.Id == item.ToAccountId),
+                    Statu=item.Statu
+                });
+            }
+            //lmklmö
+            _account.TransactionList=listDto;
+
+            return View(_account);
+        }
+
         [HttpPost]
         public IActionResult Create(Account account)
         {
@@ -59,11 +91,12 @@ namespace Aribilgi.BankApp.Web.Controllers
             transaction.TransactionTime = DateTime.Now;
             transaction.Statu = TransactionStatu.Beklemede;
             transaction.Amount = amount;
+            transaction.ToAccountId = _toAccount.Id;
             _transactionRepo.Add(transaction);
 
             return RedirectToAction("Index", "Home");
 
-            
+
         }
     }
 }
